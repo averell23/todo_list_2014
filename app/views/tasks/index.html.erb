@@ -1,11 +1,7 @@
-<html>
-  <head><title>Nifty Todo App</title></head>
-  <body>
-    <h1>There are <%= @tasks.size %> Tasks</h1>
-    <ul>
-      <% for task in @tasks %>
-        <li><%= link_to task.title, task_path(task) %></li>
-      <% end %>
-    </ul>
-  </body>
-</html>
+<p><%= link_to "new task", new_task_path %></p>
+<h1>There are <%= @tasks.size %> Tasks</h1>
+<div class="list-grou">
+  <% for task in @tasks %>
+    <%= link_to task.title, task_path(task), class: 'list-group-item' %></li>
+  <% end %>
+</ul>
