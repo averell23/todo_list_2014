@@ -15,8 +15,19 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(params.require(:task).permit(:title))
-    @task.save!
+    @task = Task.new(params.require(:task).permit(:title, :notes))
+    if @task.save
+      flash.notice = "New task created"
+      redirect_to tasks_url
+    else
+      render :new
+    end
+  end
+
+  def destroy
+    @task = Task.find params[:id]
+    @task.destroy!
+    flash.notice = "Task deleted"
     redirect_to tasks_url
   end
 
