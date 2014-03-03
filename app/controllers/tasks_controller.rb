@@ -10,4 +10,14 @@ class TasksController < ApplicationController
     @task = Task.find params[:id]
   end
 
+  def new
+    @task = Task.new
+  end
+
+  def create
+    @task = Task.new(params.require(:task).permit(:title))
+    @task.save!
+    redirect_to tasks_url
+  end
+
 end
