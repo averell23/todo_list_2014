@@ -3,7 +3,7 @@ class TasksController < ApplicationController
 
   # public Object index() { return render("something"); }
   def index
-    @message = "I am the world"
+    @message = Time.now
   end
 
 end
