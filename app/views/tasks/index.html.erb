@@ -1,7 +1,11 @@
 <html>
   <head><title>Nifty Todo App</title></head>
   <body>
-    <h1>Hello World</h1>
-    <p><%= "The time is: '#{@message}'" %></p>
+    <h1>There are <%= @tasks.size %> Tasks</h1>
+    <ul>
+      <% for task in @tasks %>
+        <li><%= link_to task.title, task_path(task) %></li>
+      <% end %>
+    </ul>
   </body>
 </html>
