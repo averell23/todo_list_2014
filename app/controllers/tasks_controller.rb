@@ -1,20 +1,18 @@
 class TasksController < ApplicationController
 # class TasksController extends ApplicationController
   before_filter :authenticate_user!
-  before_filter :find_task, only: [:show, :edit, :update]
+  before_filter :find_task, only: [:show, :edit, :update, :destroy]
 
   # public Object index() { return render("something"); }
   def index
+    @tasks = Task.where(user_id: current_user.id)
     if params[:show] == 'pending'
-      @tasks = Task.where(done: nil)
-    else
-      @tasks = Task.all
+      @tasks = @tasks.where(done: nil)
     end
-    @tasks.limit 10
+    @tasks = @tasks.limit 10
   end
 
   def show
-    @task = Task.find params[:id]
   end
 
   def new
@@ -25,7 +23,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(params.require(:task).permit(:title, :notes))
+    @task = current_user.tasks.new(params.require(:task).permit(:title, :notes))
     if @task.save
       flash.notice = "New task created"
       redirect_to tasks_url
@@ -53,7 +51,7 @@ class TasksController < ApplicationController
   private
 
   def find_task
-    @task = Task.find params[:id]
+    @task = Task.where(user_id: current_user.id).find params[:id]
   rescue ActiveRecord::RecordNotFound
     flash.notice = "This record does not exist"
     redirect_to tasks_url
