@@ -31,8 +31,12 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find params[:id]
-    @task.update_attributes!(params.require(:task).permit(:title, :notes, :done))
-    redirect_to task_path(@task)
+    if @task.update_attributes(params.require(:task).permit(:title, :notes, :done))
+      redirect_to task_path(@task)
+    else
+      flash.now.notice = @task.errors.full_messages.join(', ')
+      render :edit
+    end
   end
 
   def destroy
