@@ -1,6 +1,8 @@
 class TasksController < ApplicationController
 # class TasksController extends ApplicationController
 
+  before_filter :find_task, only: [:show, :edit, :update]
+
   # public Object index() { return render("something"); }
   def index
     @tasks = Task.all
@@ -15,7 +17,6 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find params[:id]
   end
 
   def create
@@ -30,9 +31,8 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task = Task.find params[:id]
     if @task.update_attributes(params.require(:task).permit(:title, :notes, :done))
-      redirect_to task_path(@task)
+      redirect_to @task
     else
       flash.now.notice = @task.errors.full_messages.join(', ')
       render :edit
@@ -40,9 +40,17 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @task = Task.find params[:id]
     @task.destroy!
     flash.notice = "Task deleted"
+    redirect_to tasks_url
+  end
+
+  private
+
+  def find_task
+    @task = Task.find params[:id]
+  rescue ActiveRecord::RecordNotFound
+    flash.notice = "This record does not exist"
     redirect_to tasks_url
   end
 
