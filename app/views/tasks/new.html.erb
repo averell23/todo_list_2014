@@ -1,5 +1,1 @@
-<%= form_for @task do |f| %>
-  Title: <%= f.text_field :title %><br/>
-  Notes: <%= f.text_area :notes %><br/>
-  <%= f.submit %>
-<% end %>
+<%= render partial: 'form' %>
