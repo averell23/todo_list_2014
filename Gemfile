@@ -31,6 +31,9 @@ gem 'jbuilder', '~> 1.2'
 # Simple Form
 gem 'simple_form'
 
+# Devise
+gem 'devise'
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc',                              group: :doc, require: false
 

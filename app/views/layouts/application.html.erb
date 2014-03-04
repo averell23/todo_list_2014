@@ -9,7 +9,8 @@
 </head>
 <body>
    <div class="container">
-     <%= render partial: 'layouts/flash', object: flash.notice %>
+     <%= render partial: 'layouts/flash', object: notice %>
+     <%= render partial: 'layouts/flash', object: alert %>
 
 <%= yield %>
     </div>
