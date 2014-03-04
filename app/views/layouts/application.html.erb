@@ -12,7 +12,8 @@
      <%= render partial: 'layouts/flash', object: notice %>
      <%= render partial: 'layouts/flash', object: alert %>
 
-<%= yield %>
+     <%= yield %>
+      <%= button_to 'Sign out', destroy_user_session_path, method: :delete %>
     </div>
 
 </body>

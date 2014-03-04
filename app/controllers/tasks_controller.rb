@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
 # class TasksController extends ApplicationController
-
+  before_filter :authenticate_user!
   before_filter :find_task, only: [:show, :edit, :update]
 
   # public Object index() { return render("something"); }
