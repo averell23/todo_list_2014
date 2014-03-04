@@ -1,6 +1,3 @@
-<% if @task.errors.present? %>
-  You did something wrong
-<% end %>
 <%= form_for @task do |f| %>
   Title: <%= f.text_field :title %><br/>
   Notes: <%= f.text_area :notes %><br/>
