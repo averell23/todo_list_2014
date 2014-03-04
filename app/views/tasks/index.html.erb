@@ -1,8 +1,10 @@
-<p><%= link_to "new task", new_task_path %></p>
-<p><%= link_to "Show pending", tasks_path(show: 'pending') %></p>
-<p><%= link_to "Show All", tasks_path(show: 'all') %></p>
+<div class="btn-group">
+  <%= link_to "new task", new_task_path, class: "btn btn-default navbar-btn" %>
+  <%= link_to "Show pending", tasks_path(show: 'pending'), class: 'btn btn-default navbar-btn' %>
+  <%= link_to "Show All", tasks_path(show: 'all'), class: 'btn btn-default navbar-btn' %>
+</div>
 
-<h1>There are <%= @tasks.size %> Tasks</h1>
+<h1>There are <%= @tasks.count %> Tasks</h1>
 <div class="list-group">
   <%= render partial: 'task', collection:  @tasks %>
 </ul>

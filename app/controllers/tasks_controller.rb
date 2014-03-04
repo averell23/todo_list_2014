@@ -5,12 +5,12 @@ class TasksController < ApplicationController
 
   # public Object index() { return render("something"); }
   def index
-    @task = if params[:show] == 'pending'
-              Task.where(done: nil)
-            else
-              Task
-            end
-    @tasks.limit(10)
+    if params[:show] == 'pending'
+      @tasks = Task.where(done: nil)
+    else
+      @tasks = Task.all
+    end
+    @tasks.limit 10
   end
 
   def show
